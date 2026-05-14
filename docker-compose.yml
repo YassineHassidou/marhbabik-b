@@ -1,0 +1,95 @@
+services:
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    container_name: marhababik-api-gateway
+    environment:
+      PORT: 8080
+      JWT_SECRET: ${JWT_SECRET:-change-this-secret-in-production}
+      AUTH_SERVICE_URL: http://auth-service:8081
+      USER_SERVICE_URL: http://user-service:8082
+      CATEGORY_SERVICE_URL: http://category-service:8083
+      SERVICE_CATALOG_URL: http://service-catalog-service:8084
+      CHAT_SERVICE_URL: http://chat-service:8085
+    ports:
+      - "8080:8080"
+    depends_on:
+      - auth-service
+      - user-service
+      - category-service
+      - service-catalog-service
+      - chat-service
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: auth-service/Dockerfile
+    container_name: marhababik-auth-service
+    environment:
+      PORT: 8081
+      JWT_SECRET: ${JWT_SECRET:-change-this-secret-in-production}
+      AUTH_DB_PATH: /app/data/auth-service.db
+    volumes:
+      - auth-data:/app/data
+    ports:
+      - "8081:8081"
+
+  user-service:
+    build:
+      context: .
+      dockerfile: user-service/Dockerfile
+    container_name: marhababik-user-service
+    environment:
+      PORT: 8082
+      USER_DB_PATH: /app/data/user-service.db
+    volumes:
+      - user-data:/app/data
+    ports:
+      - "8082:8082"
+
+  category-service:
+    build:
+      context: .
+      dockerfile: category-service/Dockerfile
+    container_name: marhababik-category-service
+    environment:
+      PORT: 8083
+      CATEGORY_DB_PATH: /app/data/category-service.db
+    volumes:
+      - category-data:/app/data
+    ports:
+      - "8083:8083"
+
+  service-catalog-service:
+    build:
+      context: .
+      dockerfile: service-catalog-service/Dockerfile
+    container_name: marhababik-service-catalog
+    environment:
+      PORT: 8084
+      CATALOG_DB_PATH: /app/data/service-catalog-service.db
+    volumes:
+      - catalog-data:/app/data
+    ports:
+      - "8084:8084"
+
+  chat-service:
+    build:
+      context: .
+      dockerfile: chat-service/Dockerfile
+    container_name: marhababik-chat-service
+    environment:
+      PORT: 8085
+      CHAT_DB_PATH: /app/data/chat-service.db
+    volumes:
+      - chat-data:/app/data
+    ports:
+      - "8085:8085"
+
+volumes:
+  auth-data:
+  user-data:
+  category-data:
+  catalog-data:
+  chat-data:

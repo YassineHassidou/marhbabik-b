@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent><groupId>com.marhababik360</groupId><artifactId>marhababik360-backend</artifactId><version>1.0.0</version></parent>
+    <artifactId>api-gateway</artifactId>
+    <dependencies>
+        <dependency><groupId>com.google.code.gson</groupId><artifactId>gson</artifactId></dependency>
+        <dependency><groupId>com.auth0</groupId><artifactId>java-jwt</artifactId></dependency>
+    </dependencies>
+    <build><plugins>
+        <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId></plugin>
+        <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-shade-plugin</artifactId><configuration><transformers><transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"><mainClass>com.marhababik360.gateway.ApiGatewayApplication</mainClass></transformer></transformers></configuration></plugin>
+    </plugins></build>
+</project>

@@ -1,0 +1,17 @@
+package com.marhababik360.auth.model;
+
+public class User {
+    public String id;
+    public String fullName;
+    public String email;
+    public String passwordHash;
+    public String role;
+    public Integer age;
+    public String cn;
+    public String phone;
+    public String category;
+    public String businessName;
+    public String profilePhoto;
+    public String createdAt;
+    public String updatedAt;
+}
